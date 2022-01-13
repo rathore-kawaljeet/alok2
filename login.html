@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main-container">
+
+        <div class="form-container" style="margin: auto;">
+            <h3 class="login-btn box-shadow">Not registered yet? <a href="index.html">Register
+                    Here</a>
+            </h3>
+
+            <form class="box-shadow" id="form"'>
+                <!-- userName -->
+                <div class="form-control error">
+                    <input type="text" name="txtName" placeholder="Username" id="username">
+                    <i></i>
+                    <img class="error-icon" src="images/icon-error.svg" alt="">
+                </div>
+
+                <!-- password -->
+                <div class="form-control error">
+                    <input type="password" name="txtpass" placeholder="Password" id="password">
+                    <i></i>
+                    <img class="error-icon" src="images/icon-error.svg" alt="">
+                </div>
+                <!-- submitBtn -->
+                <input type="submit" value="Login" class="cta box-shadow">
+                <p class="user-content">By clicking the button, you are agreeing to our <a href="#">Terms and
+                        Services</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("form");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const userName = form["username"].value;
+            const password = form["password"].value;
+
+            if (userName === "") {
+                addError("username", "Please enter a username");
+            } else {
+                removeError("username");
+            }
+
+            if (password === "") {
+                addError("password", "Password can not be empty");
+            } else if (password.length < 8) {
+                addError("password", "Password must be at least 8 character");
+            } else {
+                removeError("password");
+            }
+        });
+
+        function addError(name, message) {
+            const i = form[name].parentNode.querySelector("i");
+            i.innerText = message;
+            i.style.display = "inline";
+
+            form[name].parentNode.querySelector("img").style.display = "block";
+            form[name].parentNode.querySelector("input").style.border =
+                "2px solid hsl(0, 100%, 74%)";
+            form[name].parentNode.style.marginBottom = "3.5rem";
+        }
+
+        function removeError(name) {
+            const i = form[name].parentNode.querySelector("i");
+            i.innerText = "";
+            i.style.display = "none";
+
+            form[name].parentNode.querySelector("img").style.display = "none";
+            form[name].parentNode.querySelector("input").style.border =
+                "1px solid lightgray";
+            form[name].parentNode.style.marginBottom = "2rem";
+        }
+
+    </script>
+</body>
+
+</html>
